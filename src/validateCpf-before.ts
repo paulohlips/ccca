@@ -4,7 +4,7 @@ export default function validateCpf(cpf: string): boolean {
 
     const cleanedCpf = removeSpecialCharacters(cpf)
 
-    const allDigitsAreZero = checkIfAllDigitsAreZero(cleanedCpf)
+    const allDigitsAreZero = checkIfAllDigitsAreEqual(cleanedCpf)
     if(allDigitsAreZero) return false
 
     try{
@@ -33,7 +33,7 @@ const removeSpecialCharacters = (cpf: string): string => {
     .replace(" ","")
 }
 
-const checkIfAllDigitsAreZero = (cleanedCpf: string): boolean  => {
+const checkIfAllDigitsAreEqual = (cleanedCpf: string): boolean  => {
     return cleanedCpf.split("").every(c => c === cleanedCpf[0])
 }
 
