@@ -1,4 +1,4 @@
-export default function validateCpf(cpf: string): boolean {
+function validateCpf(cpf) {
     const isValid = checkIfIsValidCpf(cpf)
     if(!isValid) return false
 
@@ -8,7 +8,7 @@ export default function validateCpf(cpf: string): boolean {
     if(allDigitsAreZero) return false
 
     try{
-        let verificationNumber:string
+        let verificationNumber
         const [firstVerificationDigit, secondVerificationDigit] = calculateAllDigitsSum(cleanedCpf)
 
         const lastTwoDigits = cpf.substring(cpf.length-2, cpf.length)
@@ -21,11 +21,11 @@ export default function validateCpf(cpf: string): boolean {
     }
 }
 
-const checkIfIsValidCpf = (cpf: string): boolean => {
+const checkIfIsValidCpf = (cpf) => {
     return (cpf === null || cpf === undefined || cpf.length !== 11)
 }
 
-const removeSpecialCharacters = (cpf: string): string => {
+const removeSpecialCharacters = (cpf) => {
     return cpf
     .replace('.','')
     .replace('.','')
@@ -33,15 +33,15 @@ const removeSpecialCharacters = (cpf: string): string => {
     .replace(" ","")
 }
 
-const checkIfAllDigitsAreEqual = (cleanedCpf: string): boolean  => {
+const checkIfAllDigitsAreEqual = (cleanedCpf)  => {
     return cleanedCpf.split("").every(c => c === cleanedCpf[0])
 }
 
-const calculateAllDigitsSum = (cleanedCpf: string): [number, number] => {
-    let allSumForFirstValidationDigit: number = 0, allSumForSecondValidationDigit: number = 0
-    let secondVerificationDigit: number = 0
-    let digit: number = 0
-    let firstVerificationDigit: number = 0, divisionReminder: number = 0
+const calculateAllDigitsSum = (cleanedCpf) => {
+    let allSumForFirstValidationDigit = 0, allSumForSecondValidationDigit = 0
+    let secondVerificationDigit = 0
+    let digit = 0
+    let firstVerificationDigit = 0, divisionReminder = 0
 
     for (let index = 1; index < cleanedCpf.length -1; index++) {
         digit = Number(cleanedCpf[index -1])
@@ -58,5 +58,9 @@ const calculateAllDigitsSum = (cleanedCpf: string): [number, number] => {
     secondVerificationDigit = (divisionReminder < 2) ? 0 : 11 - divisionReminder
 
     return [firstVerificationDigit, secondVerificationDigit]
+}
+
+module.exports = {
+    validateCpf
 }
 

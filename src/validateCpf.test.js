@@ -1,5 +1,4 @@
-import validateCpf from "./validateCpf-before"
-
+const { validateCpf } = require("./validateCpf")
 test("Should return true when cpf is valid and false if invalid", function () {
   expect(validateCpf("935.411.347-80")).toBe(true)
 })
